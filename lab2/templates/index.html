@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hugging face OCR</title>
+</head>
+<body>
+    <h1>Upload image for ORC</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if image_url %}
+        <h2>Uploaded Image:</h2>
+        <img src="{{ image_url }}" alt="Uploaded Image" width="400">
+    {% endif %}
+
+    {% if extracted_text %}
+        <h2>Detected Text:</h2>
+        <p>{{ extracted_text }}</p>
+    {% endif %}
+</body>
+</html>
