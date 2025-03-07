@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+</head>
+<body>
+    <h2>Nhập văn bản tiếng anh muốn dịch:</h2>
+    <textarea id="inputText" row="4" cols="50"></textarea>
+    <br>
+    <button onclick="analyzeSentiment()">Dịch</button>
+    <p>Bản dịch: <span id="result"></span></p>
+
+    <script>
+        async function analyzeSentiment() {
+            let text = document.getElementById("inputText").value;
+            let response = await fetch("http://localhost:5000/translate", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ text: text })
+            })
+            let data = await response.json()
+            document.getElementById("result").innerText = data[0]?.translation_text || "Lỗi khi dịch"
+        }
+    </script>
+</body>
+</html>
